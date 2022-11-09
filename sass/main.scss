@@ -1,13 +1,6 @@
 @import "./utils/variables";
-@import "./utils/fonctions";
 @import "./utils/mixins";
 @import "./base/base";
-@import "./components/retour-accueil";
-@import "./components/image-restaurant";
 @import "./layouts/header";
-@import "./layouts/footer";
-@import "./layouts/liste-menu";
-@import "./pages/chargement-accueil";
-@import "./pages/localisation-accueil";
-@import "./pages/fonctionnement-accueil";
-@import "./pages/restaurant-accueil";
+@import "./layouts/search";
+@import "./layouts/receipts";

@@ -1,0 +1,114 @@
+.receipts {
+
+
+  &__list__article {
+    max-width: 380px;
+    max-height: 364px;
+    overflow: hidden;
+    padding: 0;
+    margin-bottom: 50px;
+    border-radius: 5px;
+
+    .row {
+      max-width: 380px;
+      margin: 0;
+    }
+
+
+    &__image {
+      height: 178px;
+      background: #C7BEBE;
+      padding: 0;
+    }
+
+
+    &__information {
+      padding-right: 20px;
+      padding-left: 20px;
+
+
+      &__title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        height: 22px;
+        line-height: 11.6px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-weight: 550;
+
+        text-overflow: ellipsis;
+
+
+        &__time {
+          display: flex;
+          align-items: center;
+          height: 22px;
+          font-weight: 700;
+          min-width: 78px;
+          white-space: nowrap;
+
+
+          img {
+            height: 20px;
+            width: 20px;
+            margin-right: 7px;
+          }
+        }
+      }
+    }
+
+
+    &__ingredients {
+      padding: 0 0 0 0;
+      margin-left: 20px;
+      margin-bottom: 19px;
+      max-width: 171px;
+      height: 105px;
+
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+
+        li {
+          font-size: 12px;
+          font-weight: 700;
+          line-height: 14.4px;
+
+
+          span {
+            font-weight: 400;
+          }
+        }
+      }
+    }
+
+
+    &__description {
+      font-family: "Roboto", sans-serif;
+      padding: 0;
+      margin-bottom: 15px;
+      margin-right: 18px;
+      max-width: 171px;
+      max-height: 109px;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: 0.055em;
+
+
+      p {
+        height: 72px;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+}

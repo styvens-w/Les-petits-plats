@@ -1,0 +1,42 @@
+@mixin colorBtn($palettes) {
+  @each $key, $value in $palettes {
+    &__#{$key} {
+      max-width: 170px;
+      margin-right: 20px;
+      padding: 0;
+
+      &.active {
+        max-width: initial;
+      }
+
+      ##{$key}-filter--button, ##{$key}-filter--input {
+        padding: 23px 0 24px 19px;
+        border: 0;
+        background: map-get($palettes, $key);
+        color: white;
+      }
+
+      .dropdown-menu {
+        background: map-get($palettes, $key);
+
+        span {
+          color: white;
+        }
+      }
+
+      @if($key == 'ustensils') {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+
+@mixin colorFilter($palettes) {
+  @each $key, $value in $palettes {
+    &__#{$key} {
+      background: map-get($palettes, $key);
+      color: white;
+    }
+  }
+}
