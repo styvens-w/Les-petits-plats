@@ -4,9 +4,20 @@
       max-width: 170px;
       margin-right: 20px;
       padding: 0;
+      @media screen and (max-width: 575px) {
+        max-width: calc(100% - 30px);
+        width: 100%;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
 
       &.active {
         max-width: initial;
+
+        @media screen and (max-width: 575px) {
+          max-width: calc(100% - 30px);
+        }
       }
 
       ##{$key}-filter--button, ##{$key}-filter--input {

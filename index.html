@@ -38,18 +38,18 @@
                 <button class="btn dropdown-toggle col-12" type="button" id="ingredients-filter--button" data-bs-toggle="dropdown" aria-expanded="false">
                     Ingredients
                 </button>
-                <input type="text" class="btn col-11" id="ingredients-filter--input" placeholder="Rechercher un ingrédient" onfocus="isFocus = '1'" onblur="isFocus = '0'">
+                <input type="text" class="btn col-11 searchFilter" id="ingredients-filter--input" placeholder="Rechercher un ingrédient" onfocus="isFocus = '1'" onblur="isFocus = '0'">
                 <div class="dropdown-menu col-12" aria-labelledby="ingredients-filter--button">
                     <div class="row"></div>
                 </div>
             </div>
 
-            <div class="dropdown col-6 search__filter__appareils">
-                <button class="btn dropdown-toggle col-12" type="button" id="appareils-filter--button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown col-6 search__filter__appliance">
+                <button class="btn dropdown-toggle col-12" type="button" id="appliance-filter--button" data-bs-toggle="dropdown" aria-expanded="false">
                     Appareils
                 </button>
-                <input type="text" class="btn col-11" id="appareils-filter--input" placeholder="Rechercher un appareil" onfocus="isFocus = '1'" onblur="isFocus = '0'">
-                <div class="dropdown-menu col-12" aria-labelledby="appareils-filter--button">
+                <input type="text" class="btn col-11 searchFilter" id="appliance-filter--input" placeholder="Rechercher un appareil" onfocus="isFocus = '1'" onblur="isFocus = '0'">
+                <div class="dropdown-menu col-12" aria-labelledby="appliance-filter--button">
                     <div class="row"></div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <button class="btn dropdown-toggle col-12" type="button" id="ustensils-filter--button" data-bs-toggle="dropdown" aria-expanded="false">
                     Ustensiles
                 </button>
-                <input type="text" class="btn col-11" id="ustensils-filter--input" placeholder="Rechercher un ustensile" onfocus="isFocus = '1'" onblur="isFocus = '0'">
+                <input type="text" class="btn col-11 searchFilter" id="ustensils-filter--input" placeholder="Rechercher un ustensile" onfocus="isFocus = '1'" onblur="isFocus = '0'">
                 <div class="dropdown-menu col-12" aria-labelledby="ustensils-filter--button">
                     <div class="row"></div>
                 </div>
@@ -84,10 +84,13 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
 </script>
 
-
-<script src="scripts/factories/receipts.js"></script>
-<script src="scripts/pages/index.js"></script>
+<script src="scripts/utils/updateList.js"></script>
 <script src="scripts/utils/style.js"></script>
+<script src="scripts/utils/search.js"></script>
+<script src="scripts/utils/searchF.js"></script>
+<script src="scripts/pages/index.js"></script>
+<script src="scripts/factories/receipts.js"></script>
+
 </body>
 
 </html>

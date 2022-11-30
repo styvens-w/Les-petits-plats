@@ -51,7 +51,7 @@ body {
   background: #3282F7;
   color: white;
 }
-.search__result__appareils {
+.search__result__appliance {
   background: #68D9A4;
   color: white;
 }
@@ -86,8 +86,22 @@ body {
   margin-right: 20px;
   padding: 0;
 }
+@media screen and (max-width: 575px) {
+  .search__filter__ingredients {
+    max-width: calc(100% - 30px);
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 .search__filter__ingredients.active {
   max-width: initial;
+}
+@media screen and (max-width: 575px) {
+  .search__filter__ingredients.active {
+    max-width: calc(100% - 30px);
+  }
 }
 .search__filter__ingredients #ingredients-filter--button, .search__filter__ingredients #ingredients-filter--input {
   padding: 23px 0 24px 19px;
@@ -101,24 +115,38 @@ body {
 .search__filter__ingredients .dropdown-menu span {
   color: white;
 }
-.search__filter__appareils {
+.search__filter__appliance {
   max-width: 170px;
   margin-right: 20px;
   padding: 0;
 }
-.search__filter__appareils.active {
+@media screen and (max-width: 575px) {
+  .search__filter__appliance {
+    max-width: calc(100% - 30px);
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.search__filter__appliance.active {
   max-width: initial;
 }
-.search__filter__appareils #appareils-filter--button, .search__filter__appareils #appareils-filter--input {
+@media screen and (max-width: 575px) {
+  .search__filter__appliance.active {
+    max-width: calc(100% - 30px);
+  }
+}
+.search__filter__appliance #appliance-filter--button, .search__filter__appliance #appliance-filter--input {
   padding: 23px 0 24px 19px;
   border: 0;
   background: #68D9A4;
   color: white;
 }
-.search__filter__appareils .dropdown-menu {
+.search__filter__appliance .dropdown-menu {
   background: #68D9A4;
 }
-.search__filter__appareils .dropdown-menu span {
+.search__filter__appliance .dropdown-menu span {
   color: white;
 }
 .search__filter__ustensils {
@@ -127,8 +155,22 @@ body {
   padding: 0;
   margin-right: 0;
 }
+@media screen and (max-width: 575px) {
+  .search__filter__ustensils {
+    max-width: calc(100% - 30px);
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 .search__filter__ustensils.active {
   max-width: initial;
+}
+@media screen and (max-width: 575px) {
+  .search__filter__ustensils.active {
+    max-width: calc(100% - 30px);
+  }
 }
 .search__filter__ustensils #ustensils-filter--button, .search__filter__ustensils #ustensils-filter--input {
   padding: 23px 0 24px 19px;
@@ -175,7 +217,6 @@ body {
 .search__filter input.active {
   display: block;
   cursor: text;
-  caret-color: black;
   width: 90% !important;
   position: absolute;
   z-index: 9999;
@@ -211,8 +252,37 @@ body {
   margin-bottom: 50px;
   border-radius: 5px;
 }
+@media screen and (max-width: 1399px) and (min-width: 1200px) {
+  .receipts__list__article {
+    max-width: 370px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .receipts__list__article {
+    max-width: calc(50% - 15px);
+  }
+}
+@media screen and (max-width: 991px) {
+  .receipts__list__article {
+    max-width: calc(50% - 5px);
+  }
+}
+@media screen and (max-width: 767px) {
+  .receipts__list__article {
+    max-width: calc(100% + 10px);
+    width: calc(100% + 10px);
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .receipts__list__article {
+    max-width: initial;
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 .receipts__list__article .row {
-  max-width: 380px;
   margin: 0;
 }
 .receipts__list__article__image {
@@ -223,6 +293,18 @@ body {
 .receipts__list__article__information {
   padding-right: 20px;
   padding-left: 20px;
+}
+@media screen and (max-width: 1399px) and (min-width: 1200px) {
+  .receipts__list__article__information {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .receipts__list__article__information {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 .receipts__list__article__information__title {
   display: flex;
@@ -249,11 +331,19 @@ body {
   margin-right: 7px;
 }
 .receipts__list__article__ingredients {
-  padding: 0 0 0 0;
-  margin-left: 20px;
+  padding: 0 0 0 20px;
   margin-bottom: 19px;
-  max-width: 171px;
   height: 105px;
+}
+@media screen and (max-width: 1399px) and (min-width: 1200px) {
+  .receipts__list__article__ingredients {
+    padding-left: 10px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .receipts__list__article__ingredients {
+    padding-left: 10px;
+  }
 }
 .receipts__list__article__ingredients ul {
   list-style: none;
@@ -270,15 +360,23 @@ body {
 }
 .receipts__list__article__description {
   font-family: "Roboto", sans-serif;
-  padding: 0;
   margin-bottom: 15px;
-  margin-right: 18px;
-  max-width: 171px;
+  padding: 0 18px 0 0;
   max-height: 109px;
   font-size: 12px;
   font-weight: 400;
   line-height: 12px;
   letter-spacing: 0.055em;
+}
+@media screen and (max-width: 1399px) and (min-width: 1200px) {
+  .receipts__list__article__description {
+    padding-right: 10px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .receipts__list__article__description {
+    padding-right: 10px;
+  }
 }
 .receipts__list__article__description p {
   height: 72px;

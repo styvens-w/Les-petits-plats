@@ -5,7 +5,9 @@ function receiptsFactory(data) {
 
     function getReceiptsCardDOM() {
 
-        article.classList.add("col-4");
+        article.classList.add("col-xl-4");
+        article.classList.add("col-md-6");
+        article.classList.add("col-sm-12");
         article.classList.add("receipts__list__article");
 
         const principal = document.createElement('div');
