@@ -1,5 +1,10 @@
+/**
+ * On vas crée les éléments d'une recette pour les afficher.
+ * @param { Array } data - Les données d'une recette.
+ * @returns {{id, name, ingredients, time, description, getReceiptsCardDOM: (function(): HTMLElement)}}
+ */
 function receiptsFactory(data) {
-    const { id, name, servings, ingredients, time, description, appliance, ustensils } = data;
+    const { id, name, ingredients, time, description } = data;
     const article = document.createElement('article');
 
 
@@ -78,5 +83,5 @@ function receiptsFactory(data) {
         return (article);
     }
 
-    return { id, name, servings, ingredients, time, description, appliance, ustensils, getReceiptsCardDOM }
+    return { id, name, ingredients, time, description, getReceiptsCardDOM }
 }

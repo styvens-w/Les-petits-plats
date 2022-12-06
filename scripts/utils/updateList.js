@@ -1,113 +1,104 @@
-function updateList(element, recipesList) {
-    let newListRecipe = []
-    let filters = document.querySelectorAll("." + element.parentNode.classList[2] + " .dropdown-menu .row span");
-    filtersSelect(filters);
+function updateList(recipesList) {
+    const newListRecipe = []
+    const inputs = document.querySelectorAll(".search__filter input");
 
-    filters.forEach(filter => {
+    inputs.forEach(input => {
+        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
 
-        if (filtersSelected.includes(filter.innerText)) {
-            filter.remove()
-        }
+        filters.forEach(filter => {
+
+            if (filtersSelected.includes(filter.innerText)) {
+
+                filter.remove();
+
+            }
+
+            filter.addEventListener("click", function () {
+                filtersSelectedBtn = document.querySelectorAll(".search__result span img");
+                const filterType = input.id.replace("-filter--input", "");
+
+                filtersSelected.push(filter.innerText);
+
+                recipesList.forEach(result => {
+
+                    if (filterType === "ingredients") {
+                        result.ingredients.forEach(ingre => {
+                            if (ingre.ingredient.includes(filter.innerText)) {
+                                newListRecipe.push(result);
+                            }
+                        });
+                    }
 
 
-        filter.addEventListener("click", function () {
-            const filterType = element.id.replace("-filter--input", "");
-
-            recipesList.forEach(result => {
-
-                if (filterType === "ingredients") {
-                    result.ingredients.forEach(ingre => {
-                        if (ingre.ingredient.includes(filter.innerText)) {
+                    if (filterType === "appliance") {
+                        if (result.appliance.includes(filter.innerText)) {
                             newListRecipe.push(result);
                         }
-                    });
-                }
-
-
-                if (filterType === "appliance") {
-                    if (result.appliance.includes(filter.innerText)) {
-                        newListRecipe.push(result);
                     }
-                }
 
 
-                if (filterType === "ustensils") {
-                    if (result.ustensils.includes(filter.textContent)) {
-                        newListRecipe.push(result);
+                    if (filterType === "ustensils") {
+                        if (result.ustensils.includes(filter.textContent)) {
+                            newListRecipe.push(result);
+                        }
                     }
-                }
 
 
-                if (!newListRecipe.includes(result) && !recipeNotDisplayed.includes(result)) {
+                    if (!newListRecipe.includes(result) && !recipeNotDisplayed.includes(result)) {
 
-                    recipeNotDisplayed.push(result);
+                        recipeNotDisplayed.push(result);
 
-                }
+                    }
+                });
+
+                displayData(newListRecipe).then(r => r);
             });
-
-
-            getFilter(newListRecipe);
-            displayData(newListRecipe).then(r => r);
-
-            element.value = "";
         });
     });
 
 
-    filtersSelectedBtn = document.querySelectorAll(".search__result span img");
 
-    console.log(recipeNotDisplayed);
     filtersSelectedBtn.forEach(btn => {
+
         btn.addEventListener("click", function () {
-            const filterContent = this.parentNode;
-            const filterType = filterContent.classList[1].replace("search__result__", "");
+            filtersSelectedBtn = document.querySelectorAll(".search__result span img");
+            const filterContent = btn.parentNode;
 
-
-
-            recipeNotDisplayed.forEach(result => {
-                if (filterType === "ingredients") {
-
-                    result.ingredients.forEach(ingre => {
-                        if (!ingre.ingredient.includes(filterContent.innerText) && !recipesList.includes(result)) {
-
-                            filtersSelected.forEach(filter => {
-                                if (ingre.ingredient.includes(filter)) {
-                                    recipesList.push(result)
-                                    //recipeNotDisplayed.splice(recipeNotDisplayed.indexOf(result), 1);
-
-
-
-                                }
-                            });
-                        }
-                    });
-                }
-
-
-                if (filterType === "appliance") {
-
-                }
-
-
-                if (filterType === "ustensils") {
-
-                }
-            });
-
-
-            if (filtersSelected.includes(filterContent.innerText)) {
+            if (filtersSelected.indexOf(filterContent.innerText) >= 0) {
                 filtersSelected.splice(filtersSelected.indexOf(filterContent.innerText), 1);
             }
 
-            getFilter(recipesList);
-            displayData(recipesList).then(r => r);
+
+            recipeNotDisplayed.forEach(result => {
+
+                result.ingredients.forEach(ingre => {
+                    if (filtersSelected.every(elem => elem === ingre.ingredient) && !recipesList.includes(result)) {
+                        recipesList.push(result);
+                    }
+                });
+
+
+                if (filtersSelected.every(elem => elem === result.appliance) && !recipesList.includes(result)) {
+                    recipesList.push(result);
+                }
+
+                result.ustensils.forEach(ust => {
+                    if (filtersSelected.every(elem => elem === ust) && !recipesList.includes(result)) {
+                        recipesList.push(result);
+                    }
+                });
+
+
+
+
+                if (filtersSelected.length <= 0 && !recipesList.includes(result)) {
+                    recipesList.push(result)
+                }
+            });
+
 
             filterContent.remove();
-
+            displayData(recipesList).then(r => r);
         });
-
     });
-
-
-
 }

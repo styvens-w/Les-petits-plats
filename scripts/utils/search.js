@@ -5,7 +5,14 @@ async function search(inputMain, caractMin, array, inputsFilters) {
 
     inputMain.addEventListener("input", async function () {
 
+        recipeNotDisplayed.splice(0, recipeNotDisplayed.length);
+        filtersSelected.splice(0, filtersSelected.length);
+        document.querySelector(".search__result").innerHTML = "";
+
         if (inputMain.value.length >= caractMin) {
+
+
+
             newArray.splice(0, newArray.length)
 
             recipes.forEach(result => {
@@ -25,13 +32,10 @@ async function search(inputMain, caractMin, array, inputsFilters) {
                 });
             });
 
-
-            getFilter(newArray);
             await displayData(newArray);
 
         } else {
 
-            getFilter(recipes);
             await displayData(recipes);
 
         }
@@ -39,13 +43,8 @@ async function search(inputMain, caractMin, array, inputsFilters) {
 
 
     if (inputsFilters) {
-
         inputsFilters.forEach(input => {
-
-            //let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
-            //filtersSelect(filters);
-
-            input.addEventListener("input", function () {
+            input.addEventListener("input", async function () {
                 const inputType = input.id.replace("-filter--input", "")
 
                 if (inputType === "ingredients") {
@@ -62,9 +61,10 @@ async function search(inputMain, caractMin, array, inputsFilters) {
 
                         ingredientsContainer.innerHTML = '';
                         createFilter(filter, ingredientsContainer);
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
+                        filtersSelect(filters);
+                        updateList(newArray);
                     });
-
-                   updateList(input, newArray);
                 }
 
 
@@ -80,10 +80,10 @@ async function search(inputMain, caractMin, array, inputsFilters) {
 
                         appareilsContainer.innerHTML = '';
                         createFilter(filter, appareilsContainer);
-
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
+                        filtersSelect(filters);
+                        updateList(newArray);
                     });
-
-                    updateList(input, newArray);
                 }
 
 
@@ -99,22 +99,18 @@ async function search(inputMain, caractMin, array, inputsFilters) {
                                     filter.push(ust);
                                 }
                             }
-
                         });
 
                         ustensilsContainer.innerHTML = '';
                         createFilter(filter, ustensilsContainer);
-
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
+                        filtersSelect(filters);
+                        updateList(newArray);
                     });
-
-                    updateList(input, newArray);
                 }
             });
-
-
         });
     }
-    //console.log(newArray);
 }
 
 
