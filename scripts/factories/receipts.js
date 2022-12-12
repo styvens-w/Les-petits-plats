@@ -1,12 +1,16 @@
 /**
  * On vas crée les éléments d'une recette pour les afficher.
- * @param { Array } data - Les données d'une recette.
+ * @param { Object } data - Les données d'une recette.
+ * @param { Number }  data.id - Son id
+ * @param { String }  data.name - Son nom
+ * @param { Array }  data.ingredients - Ses ingrédients
+ * @param { Number }  data.time - Son temps
+ * @param { String }  data.description - Sa description
  * @returns {{id, name, ingredients, time, description, getReceiptsCardDOM: (function(): HTMLElement)}}
  */
 function receiptsFactory(data) {
     const { id, name, ingredients, time, description } = data;
     const article = document.createElement('article');
-
 
     function getReceiptsCardDOM() {
 

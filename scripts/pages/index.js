@@ -186,6 +186,10 @@ async function displayData(recipes) {
 }
 
 
+/**
+ * Fonction d'initialisation
+ * @returns {Promise<void>}
+ */
 async function init() {
     const { recipes } = await getReceipts();
     await displayData(recipes);

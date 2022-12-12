@@ -1,3 +1,7 @@
+/**
+ * Met à jour les recettes affiché
+ * @param { Array } recipesList - Tableau des recettes
+ */
 function updateList(recipesList) {
     const newListRecipe = []
     const inputs = document.querySelectorAll(".search__filter input");
