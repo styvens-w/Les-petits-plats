@@ -2,7 +2,7 @@ const ingredientsFilter = [];
 const appareilsFilter = [];
 const ustensilsFilter = [];
 const filtersSelected = [];
-const recipeNotDisplayed = []
+const recipeNotDisplayed = [];
 const ingredientsContainer = document.querySelector(".search__filter__ingredients .dropdown-menu .row");
 const appareilsContainer = document.querySelector(".search__filter__appliance .dropdown-menu .row");
 const ustensilsContainer = document.querySelector(".search__filter__ustensils .dropdown-menu .row");
@@ -69,7 +69,7 @@ function filtersSelect(tab) {
 
                 // On supprime la valeur des champs de recherche pour les filtres
                 input.value = "";
-            })
+            });
 
         });
     });

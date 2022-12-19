@@ -88,6 +88,11 @@ function resizeArticle(element) {
     }
     if (window.innerWidth < 1200) {
 
+        for (let i = 1; i < element.length; i++) {
+            element[i].style.marginLeft = "0";
+            element[i].style.marginRight = "0";
+        }
+
         for (let i = 1; i < element.length; i += 2) {
             element[i].style.marginLeft = "30px";
             element[i].style.marginRight = "0";

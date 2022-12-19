@@ -6,7 +6,7 @@
  * @param { NodeListOf<Element> } [inputsFilters] - Les champs de recherche pour les filtres
  * @returns {Promise<void>}
  */
-async function search(inputMain, caractMin, array, inputsFilters) {
+function search(inputMain, caractMin, array, inputsFilters) {
     // On récupère le tableau des recettes
     const {recipes} = array;
 
@@ -15,7 +15,7 @@ async function search(inputMain, caractMin, array, inputsFilters) {
 
 
     // On ajoute un évènement si le champ de recherche principal change
-    inputMain.addEventListener("input", async function () {
+    inputMain.addEventListener("input", function () {
 
         // On vide le tableau des recettes non affiché
         recipeNotDisplayed.splice(0, recipeNotDisplayed.length);
@@ -27,40 +27,57 @@ async function search(inputMain, caractMin, array, inputsFilters) {
         // Si le nombre de caractère du champ principal est supérieur ou égale au nombre défini
         if (inputMain.value.length >= caractMin) {
 
+            // On initialise le temp à 0
+            let time = 0;
+            // On récupère la date actuel (pour tester les performances)
+            let newdate = new Date();
+            // On recupère son temps en ms et on la stocke dans une variable
+            const fordiff = newdate.getTime();
+
+
             // On vide le tableau qui contient les recettes recherché
             newArray.splice(0, newArray.length)
 
             // On parcour chaque éléments du tableau des recettes
-            for (let i = 0; i < recipes.length; i++) {
+            recipes.forEach(result => {
+
                 // Si le nom de la recette ou sa description contient le mot du champ de recheche
-                if (recipes[i].name.sansAccent().includes(this.value.sansAccent()) || recipes[i].description.sansAccent().includes(this.value.sansAccent())) {
+                if (result.name.sansAccent().includes(this.value.sansAccent()) || result.description.sansAccent().includes(this.value.sansAccent())) {
                     // Et si le tableau des recettes recherché ne contient pas la recette en question
-                    if (!newArray.includes(recipes[i])) {
+                    if (!newArray.includes(result)) {
                         // On l'ajoute au tableau des recettes recherché
-                        newArray.push(recipes[i]);
+                        newArray.push(result);
                     }
                 }
 
                 // On parcour les ingrédients de la recette
-                for (let x = 0; x < recipes[i].ingredients.length; x++) {
+                result.ingredients.forEach(ingre => {
+
                     // Si le nom de l'ingrédient contient le mot du champ de recheche
-                    if (recipes[i].ingredients[x].ingredient.sansAccent().includes(this.value.sansAccent())) {
+                    if (ingre.ingredient.sansAccent().includes(this.value.sansAccent())) {
                         // Et si le tableau des recettes recherché ne contient pas la recette en question
-                        if (!newArray.includes(recipes[i])) {
+                        if (!newArray.includes(result)) {
                             // On l'ajoute au tableau des recettes recherché
-                            newArray.push(recipes[i]);
+                            newArray.push(result);
                         }
                     }
-                }
-            }
+                });
+            });
 
             // On affiche les recettes recherché
-            await displayData(newArray);
+            displayData(newArray).then(r => r);
+
+            // On recupère la nouvelle date actuel a la fin de la fonction (pour tester les performances)
+            newdate = new Date();
+            // Le temp est égal au temp initial "0" + le temps de la nouvelle date moin le temps de la première date (On obtient le temps d'éxécution de la fonction)
+            time = time + (newdate.getTime() - fordiff);
+            // On l'affiche dans la console
+            console.log("Méthode forEach = " + time + "ms");
 
         } else {
 
             // Sinon on affiche les recettes du tableau complet
-            await displayData(recipes);
+            displayData(recipes).then(r => r);
 
         }
     });
@@ -69,12 +86,11 @@ async function search(inputMain, caractMin, array, inputsFilters) {
     // Si il y a des champs de recherche pour les filtres
     if (inputsFilters) {
         // On les parcours
-        for (let i = 0; i < inputsFilters.length; i++) {
-
+        inputsFilters.forEach(input => {
             // On leur ajoute un évènement si le champ de recherche change
-            inputsFilters[i].addEventListener("input", async function () {
+            input.addEventListener("input", async function () {
                 // On récupère l'id du input et on récupère seulement le premier mot qui correspond a son type (ingredients, appliance ou ustensils)
-                const inputType = inputsFilters[i].id.replace("-filter--input", "")
+                const inputType = input.id.replace("-filter--input", "")
 
                 // Si le type de recherche est "ingredients"
                 if (inputType === "ingredients") {
@@ -82,72 +98,74 @@ async function search(inputMain, caractMin, array, inputsFilters) {
                     let filter = [];
 
                     // On parcour le nouveau tableau (des recettes)
-                    for (let x = 0; x < newArray.length; x++) {
+                    newArray.forEach(result => {
                         // On parcours les ingrédients d'une recettes
-                        for (let y = 0; y < newArray[x].ingredients.length; y++) {
+                        result.ingredients.forEach(ing => {
                             // Si le nom de l'ingrédient contient le mot du champ de recherche
-                            if (newArray[x].ingredients[y].ingredient.sansAccent().includes(inputsFilters[i].value.sansAccent())) {
+                            if (ing.ingredient.sansAccent().includes(input.value.sansAccent())) {
                                 // Et si le tableau des nouveaux filtres et les filtres selectionné ne contient pas l'ingredient en question
-                                if (!filter.includes(newArray[x].ingredients[y].ingredient) && !filtersSelected.includes(newArray[x].ingredients[y].ingredient)) {
+                                if (!filter.includes(ing.ingredient) && !filtersSelected.includes(ing.ingredient)) {
                                     // On l'ajoute au tableau des nouveaux filtres
-                                    filter.push(newArray[x].ingredients[y].ingredient);
+                                    filter.push(ing.ingredient);
                                 }
                             }
-                        }
+                        });
 
                         // On supprime la liste de tout les filtres d'ingrédient
                         ingredientsContainer.innerHTML = '';
                         // On appel la fonction createFilter qui vas afficher les nouveaux filtres au conteneur
                         createFilter(filter, ingredientsContainer);
                         // On stocke dans une variable les filtres du conteneur
-                        let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
                         // On appel la fonction "filterSelect" qui vas leur ajouter un évènement au click pour affiché la filtre séléctionné
                         filtersSelect(filters);
                         // On appel la fonction "updateList" qui vas mèttre a jour la liste des recettes affiché
                         updateList(newArray);
-                    }
+                    });
                 }
 
 
                 if (inputType === "appliance") {
                     let filter = [];
 
-                    for (let x = 0; x < newArray.length; x++) {
-                        if (newArray[x].appliance.sansAccent().includes(inputsFilters[i].value.sansAccent())) {
-                            if (!filter.includes(newArray[x].appliance) && !filtersSelected.includes(newArray[x].appliance)) {
-                                filter.push(newArray[x].appliance);
+                    newArray.forEach(result => {
+                        if (result.appliance.sansAccent().includes(input.value.sansAccent())) {
+                            if (!filter.includes(result.appliance) && !filtersSelected.includes(result.appliance)) {
+                                filter.push(result.appliance);
                             }
                         }
 
                         appareilsContainer.innerHTML = '';
                         createFilter(filter, appareilsContainer);
-                        let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
                         filtersSelect(filters);
                         updateList(newArray);
-                    }
+                    });
                 }
 
 
                 if (inputType === "ustensils") {
+
                     let filter = [];
 
-                    for (let x = 0; x < newArray.length; x++) {
-                        for (let y = 0; y < newArray[x].ustensils.length; y++) {
-                            if (newArray[x].ustensils[y].sansAccent().includes(inputsFilters[i].value.sansAccent())) {
-                                if (!filter.includes(newArray[x].ustensils[y]) && !filtersSelected.includes(newArray[x].ustensils[y])) {
-                                    filter.push(newArray[x].ustensils[y]);
+                    newArray.forEach(result => {
+                        result.ustensils.forEach(ust => {
+
+                            if (ust.sansAccent().includes(input.value.sansAccent())) {
+                                if (!filter.includes(ust) && !filtersSelected.includes(ust)) {
+                                    filter.push(ust);
                                 }
                             }
-                        }
+                        });
 
                         ustensilsContainer.innerHTML = '';
                         createFilter(filter, ustensilsContainer);
-                        let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
+                        let filters = document.querySelectorAll("." + input.parentNode.classList[2] + " .dropdown-menu .row span");
                         filtersSelect(filters);
                         updateList(newArray);
-                    }
+                    });
                 }
             });
-        }
+        });
     }
 }
