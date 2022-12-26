@@ -64,8 +64,16 @@ function search(inputMain, caractMin, array, inputsFilters) {
                 });
             });
 
-            // On affiche les recettes recherché
-            displayData(newArray).then(r => r);
+            // Si il n'y a pas de recette
+            if (newArray.length <= 0) {
+
+                // On l'affiche sur l'écran
+                document.querySelector(".receipts__list").innerHTML = "<h1 style='text-align: center'>Aucune recette ne correspond à votre recherche !</h1>";
+
+            } else {
+                // Sinon on affiche les recettes recherché
+                displayData(newArray).then(r => r);
+            }
 
             // On recupère la nouvelle date actuel a la fin de la fonction (pour tester les performances)
             newdate = new Date();
