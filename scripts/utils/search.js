@@ -121,8 +121,18 @@ function search(inputMain, caractMin, array, inputsFilters) {
 
                         // On supprime la liste de tout les filtres d'ingrédient
                         ingredientsContainer.innerHTML = '';
-                        // On appel la fonction createFilter qui vas afficher les nouveaux filtres au conteneur
-                        createFilter(filter, ingredientsContainer);
+
+                        // Si il n'y a pas de filtre
+                        if (filter.length <= 0) {
+
+                            // On l'affiche sur l'écran
+                            ingredientsContainer.innerHTML = "<p style='text-align: center; color: white; font-size: 16px'>Aucun filtre ne correspond à votre recherche !</p>";
+
+                        } else {
+                            // Sinon on appel la fonction createFilter qui vas afficher les nouveaux filtres au conteneur
+                            createFilter(filter, ingredientsContainer);
+                        }
+
                         // On stocke dans une variable les filtres du conteneur
                         let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
                         // On appel la fonction "filterSelect" qui vas leur ajouter un évènement au click pour affiché la filtre séléctionné
@@ -144,7 +154,18 @@ function search(inputMain, caractMin, array, inputsFilters) {
                         }
 
                         appareilsContainer.innerHTML = '';
-                        createFilter(filter, appareilsContainer);
+
+                        // Si il n'y a pas de filtre
+                        if (filter.length <= 0) {
+
+                            // On l'affiche sur l'écran
+                            appareilsContainer.innerHTML = "<p style='text-align: center; color: white; font-size: 16px'>Aucun filtre ne correspond à votre recherche !</p>";
+
+                        } else {
+                            // Sinon on appel la fonction createFilter qui vas afficher les nouveaux filtres au conteneur
+                            createFilter(filter, appareilsContainer);
+                        }
+
                         let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
                         filtersSelect(filters);
                         updateList(newArray);
@@ -165,7 +186,18 @@ function search(inputMain, caractMin, array, inputsFilters) {
                         }
 
                         ustensilsContainer.innerHTML = '';
-                        createFilter(filter, ustensilsContainer);
+
+                        // Si il n'y a pas de filtre
+                        if (filter.length <= 0) {
+
+                            // On l'affiche sur l'écran
+                            ustensilsContainer.innerHTML = "<p style='text-align: center; color: white; font-size: 16px'>Aucun filtre ne correspond à votre recherche !</p>";
+
+                        } else {
+                            // Sinon on appel la fonction createFilter qui vas afficher les nouveaux filtres au conteneur
+                            createFilter(filter, ustensilsContainer);
+                        }
+
                         let filters = document.querySelectorAll("." + inputsFilters[i].parentNode.classList[2] + " .dropdown-menu .row span");
                         filtersSelect(filters);
                         updateList(newArray);
