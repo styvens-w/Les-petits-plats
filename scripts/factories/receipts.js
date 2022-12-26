@@ -12,8 +12,9 @@ function receiptsFactory(data) {
     const { id, name, ingredients, time, description } = data;
     const article = document.createElement('article');
 
-    function getReceiptsCardDOM() {
 
+
+    function getReceiptsCardDOM() {
         article.classList.add("col-xl-4");
         article.classList.add("col-md-6");
         article.classList.add("col-sm-12");
